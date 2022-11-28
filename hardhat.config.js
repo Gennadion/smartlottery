@@ -22,8 +22,11 @@ module.exports = {
 			url: GOERLI_RPC_URL,
 			accounts: [PRIVATE_KEY],
 			chainId: 5,
-			blockConfirmations: 6,
-		},
+			blockConfirmations: 6
+		}
+	},
+	etherscan: {
+		apiKey: ETHERSCAN_API_KEY
 	},
 	gasReporter: {
 		enabled: false,
@@ -43,6 +46,6 @@ module.exports = {
 		},
 	},
 	mocha: {
-		timeout: 200000,
+		timeout: 500000,
 	},
 };

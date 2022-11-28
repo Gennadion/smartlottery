@@ -129,7 +129,7 @@ const { developmentChains, networkConfig } = require("../../helper-hardhat.confi
 				});
 
 				/* DO NOT RUN THIS TEST - promise does not get fulfilled, test timeouts */
-				/* it("picks a winner, resets the lottery and sends money", async function () {
+				it("picks a winner, resets the lottery and sends money", async function () {
 					const additionalEntrants = 3;
 					const startingAccountIndex = 1; //since deployer is 0
 					const accounts = await ethers.getSigners();
@@ -148,10 +148,6 @@ const { developmentChains, networkConfig } = require("../../helper-hardhat.confi
 							try {
 								const recentWinner = await raffle.getRecentWinner();
 								console.log(recentWinner);
-								console.log(accounts[2].address);
-								console.log(accounts[0].address);
-								console.log(accounts[1].address);
-								console.log(accounts[3].address);
 								const raffleState = await raffle.getRaffleState();
 								const endingTimeStamp = await raffle.getLatestTimeStamp();
 								const numPlayers = await raffle.getNumberOfPlayers();
@@ -173,18 +169,18 @@ const { developmentChains, networkConfig } = require("../../helper-hardhat.confi
 							} catch (e) {
 								reject(e);
 							}
-
 						});
+
+						// Setting up listener
+						// Below we fire the event and listener picks it up, and resolve
+						const tx = await raffle.performUpkeep([]);
+						const txReceipt = await tx.wait(1);
+						const winnerStartingBalance = await accounts[1].getBalance();
+						await vrfCoordinatorV2Mock.fulfillRandomWords(
+							txReceipt.events[1].args.requestId.toString(),
+							raffle.address
+						);
 					});
-					// Setting up listener
-					// Below we fire the event and listener picks it up, and resolve
-					const tx = await raffle.performUpkeep([]);
-					const txReceipt = await tx.wait(1);
-					const winnerStartingBalance = await accounts[1].getBalance();
-					await vrfCoordinatorV2Mock.fulfillRandomWords(
-						txReceipt.events[1].args.requestId.toString(),
-						raffle.address
-					);
-				}); */
+				});
 			});
 	  });
