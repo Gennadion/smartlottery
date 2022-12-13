@@ -29,7 +29,7 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
         subscriptionId = networkConfig[chainId]["subscriptionId"]
     }
     const waitBlockConfirmations = developmentChains.includes(network.name)
-        ? 5
+        ? 1
         : VERIFICATION_BLOCK_CONFIRMATIONS
 
     log("----------------------------------------------------")
