@@ -128,7 +128,6 @@ const { developmentChains, networkConfig } = require("../../helper-hardhat.confi
 					).to.be.revertedWith("nonexistent request");
 				});
 
-				/* DO NOT RUN THIS TEST - promise does not get fulfilled, test timeouts */
 				it("picks a winner, resets the lottery and sends money", async function () {
 					const additionalEntrants = 3;
 					const startingAccountIndex = 1; //since deployer is 0
